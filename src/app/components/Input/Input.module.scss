@@ -1,0 +1,48 @@
+@import '../../styles/variables.module';
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text-color;
+  margin-right: 0.5rem;
+  text-align: center;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  margin: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+
+  // حالت خطا
+  .error & {
+    border-color: $error-color;
+  }
+}
+
+.error {
+  color: $error-color;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  height: 1rem;
+}
