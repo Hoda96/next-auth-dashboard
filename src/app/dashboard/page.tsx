@@ -37,40 +37,40 @@ const DashboardPage: React.FC = () => {
     }
 
     if (!user) {
-        return null // Redirect will happen from useEffect
+        return null
     }
 
     return (
         <div className={styles.dashboardContainer}>
             <div className={styles.welcomeCard}>
                 <h1 className={styles.title}>
-                    {user.name?.first} {user.name?.last}
+                    {user.username || user.name || 'کاربر ناشناس'} عزیز
                 </h1>
-                <p className={styles.subtitle}>Welcome to your dashboard</p>
+                <p className={styles.subtitle}>به داشبورد خوش آمدید.</p>
 
                 <div className={styles.userInfo}>
                     <div className={styles.infoItem}>
-                        <span className={styles.infoLabel}>Email:</span>
+                        <span className={styles.infoLabel}>ایمیل:</span>
                         <span>{user.email || 'N/A'}</span>
                     </div>
                     <div className={styles.infoItem}>
-                        <span className={styles.infoLabel}>Phone:</span>
+                        <span className={styles.infoLabel}>شماره موبایل:</span>
                         <span>{user.phone || 'N/A'}</span>
                     </div>
                     <div className={styles.infoItem}>
-                        <span className={styles.infoLabel}>Cell:</span>
-                        <span>{user.cell || 'N/A'}</span>
+                        <span className={styles.infoLabel}>وب‌سایت:</span>
+                        <span>{user.website || 'N/A'}</span>
                     </div>
                     <div className={styles.infoItem}>
-                        <span className={styles.infoLabel}>Location:</span>
+                        <span className={styles.infoLabel}>لوکیشن:</span>
                         <span>
-                            {user.location?.street?.number} {user.location?.street?.name},
-                            {user.location?.city}, {user.location?.state}, {user.location?.country}
+                            {user.address?.street} {user.address?.city}, {user.address?.suite}, {user.address?.zipcode}
+
                         </span>
                     </div>
                     <div className={styles.infoItem}>
-                        <span className={styles.infoLabel}>Nationality:</span>
-                        <span>{user.nat || 'N/A'}</span>
+                        <span className={styles.infoLabel}>شرکت:</span>
+                        <span>{user.company?.name} </span>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@ const DashboardPage: React.FC = () => {
                     variant="secondary"
                     className={styles.logoutButton}
                 >
-                    Logout
+                    خروج
                 </Button>
             </div>
         </div>

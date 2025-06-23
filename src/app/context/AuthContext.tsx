@@ -25,20 +25,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, [])
 
     const login = async () => {
-        const response = await fetch('https://randomuser.me/api/?results=1&nat=us')
-        const data = await response.json();
-        if (data && data.results && data.results.length > 0) {
-            const userData = data.results[0]
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+            if (!response.ok) {
+                console.error('Failed to fetch user data:', response.statusText);
+                throw new Error('Failed to fetch user data');
+            }
+            const userData = await response.json();
             console.log('userData', userData);
 
-            setUser(userData);
-            localStorage.setItem('user', JSON.stringify(userData));
-            route.push('/dashboard');
-        } else {
-            console.error('Failed to fetch user data');
+            if (userData) {
+                setUser(userData);
+                localStorage.setItem('user', JSON.stringify(userData));
+                route.push('/dashboard');
+            } else {
+                console.error('No user data received');
+                throw new Error('No user data received');
+            }
+        } catch (error) {
+            console.error('Login fetch error:', error);
+            throw error; // Propagate the error to handleSubmit
         }
-
-    }
+    };
 
     const logout = () => {
         setUser(null);
